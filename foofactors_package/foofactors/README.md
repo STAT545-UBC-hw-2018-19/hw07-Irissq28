@@ -8,10 +8,12 @@ Factors are a very useful type of variable in R, but they can also drive you nut
 ### Installation
 
 ``` r
-devtools::install_github("jennybc/foofactors")
+devtools::install_github("STAT545-UBC-students/hw07-Irissq28/foofactors_package/foofactors")
 ```
 
 ### Quick demo
+
+#### `fbind()`
 
 Binding two factors via `fbind()`:
 
@@ -55,16 +57,119 @@ as.data.frame(table(x))
 #> 5 e   15
 ```
 
+#### `freq_out()`
+
 The `freq_out()` function returns a frequency table as a well-named `tbl_df`:
 
 ``` r
 freq_out(x)
-#> # A tibble: 5 × 2
-#>        x     n
-#>   <fctr> <int>
-#> 1      a    25
-#> 2      b    26
-#> 3      c    17
-#> 4      d    17
-#> 5      e    15
+#> # A tibble: 5 x 2
+#>   x         n
+#>   <fct> <int>
+#> 1 a        25
+#> 2 b        26
+#> 3 c        17
+#> 4 d        17
+#> 5 e        15
+```
+
+#### `fcheck`
+
+This is the basic function to check the whether the input is a factor or not, if true it returns nothing, otherwise it will throw an error.
+
+``` r
+fcheck(iris$Species)
+fcheck(gapminder::gapminder$continent)
+```
+
+#### `fconvert`
+
+This function is used to encode a vector/vectors as a factor/factors
+
+``` r
+fconvert("apple")
+#> [1] apple
+#> Levels: apple
+fconvert(c("low","medium","high"))
+#> [1] low    medium high  
+#> Levels: high low medium
+```
+
+#### `flevel`
+
+This function returns the levels by the order they appear in the dataset and the number of levels which its factor has.
+
+``` r
+flevel(iris$Species)
+#> [1] "setosa"     "versicolor" "virginica"  "3"
+flevel(gapminder::gapminder$continent)
+#> [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"  "5"
+```
+
+#### `fdetect`
+
+This function is used to detect factors that should be character based on the fact that the length of character equals the number of its unique values, however, factor doesn't have that characteristic.
+
+``` r
+# the input is character
+fdetect(factor(c("a","b","c")))
+#> [1] FALSE
+# the input is factor
+fdetect(factor(c("a","b","c","b")))
+#> [1] TRUE
+```
+
+#### `fset`
+
+This function is used to set levels to the order in which they appear in the data
+
+``` r
+fset(factor(c("c", "d", "b", "a")))
+#> [1] c d b a
+#> Levels: c d b a
+```
+
+### Family of related funcitons `order_doc`
+
+#### `fordered`
+
+fordered(x) is the function used to sets levels to the order in which they appear in the data, the input should be a factor, otherwise, the function will come to an error.
+
+``` r
+fordered(iris$Species)
+#> [1] setosa     versicolor virginica 
+#> Levels: setosa < versicolor < virginica
+fordered(gapminder::gapminder$continent)
+#> [1] Asia     Europe   Africa   Americas Oceania 
+#> Levels: Africa < Americas < Asia < Europe < Oceania
+```
+
+#### `fdesc`
+
+fdesc(x) is used to reorder factor in descenging order, it will come to an error when the param is not a factor.
+
+``` r
+fdesc(factor(c("a","b","c"))) # Levels: c b a
+#> [1] a b c
+#> attr(,"scores")
+#>  a  b  c 
+#> -1 -2 -3 
+#> Levels: c b a
+
+# compare to the fordered function
+fordered(factor(c("a","b","c")))
+#> [1] a b c
+#> Levels: a < b < c
+```
+
+### Family of related funcitons `df_read_write`
+
+#### `df_write`
+
+Use `df_write` to write the data frame into text file.
+
+``` r
+lev <- levels(gapminder::gapminder$continent) 
+continent_df <- as.data.frame(lev)
+df_write(continent_df, "continent.txt")
 ```

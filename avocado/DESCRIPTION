@@ -3,7 +3,7 @@ Type: Package
 Title: Avocado Prices
 Version: 0.1.0
 Author: person("Siqi", email = "anantjjz@gmail.com")
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: The package maintainer <anantjjz@gmail.com>
 Description: Historical data on avocado prices and sales volume 
 	in multiple US markets
 Depends:
@@ -17,4 +17,3 @@ Suggests:
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-URL: https://www.kaggle.com/neuromusic/avocado-prices

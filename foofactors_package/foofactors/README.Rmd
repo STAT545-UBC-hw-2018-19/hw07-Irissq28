@@ -23,10 +23,12 @@ Factors are a very useful type of variable in R, but they can also drive you nut
 ### Installation
 
 ```{r installation, eval = FALSE}
-devtools::install_github("jennybc/foofactors")
+devtools::install_github("STAT545-UBC-students/hw07-Irissq28/foofactors_package/foofactors")
 ```
   
 ### Quick demo
+
+#### `fbind()`
 
 Binding two factors via `fbind()`:
 
@@ -57,8 +59,92 @@ table(x)
 as.data.frame(table(x))
 ```
 
+#### `freq_out()`
+
 The `freq_out()` function returns a frequency table as a well-named `tbl_df`:
 
 ```{r}
 freq_out(x)
 ```
+
+#### `fcheck`
+
+This is the basic function to check the whether the input is a factor or not, if true it returns nothing, otherwise it will throw an error.
+
+```{r}
+fcheck(iris$Species)
+fcheck(gapminder::gapminder$continent)
+```
+
+#### `fconvert`
+
+This function is used to encode a vector/vectors as a factor/factors
+
+```{r}
+fconvert("apple")
+fconvert(c("low","medium","high"))
+```
+
+#### `flevel`
+
+This function returns the levels by the order they appear in the dataset and the number of levels which its factor has.
+
+```{r}
+flevel(iris$Species)
+flevel(gapminder::gapminder$continent)
+```
+
+#### `fdetect`
+
+This function is used to detect factors that should be character based on the fact that the length of character equals the number of its unique values, however, factor doesn't have that characteristic.
+
+```{r}
+# the input is character
+fdetect(factor(c("a","b","c")))
+# the input is factor
+fdetect(factor(c("a","b","c","b")))
+```
+
+#### `fset`
+
+This function is used to set levels to the order in which they appear in the data
+
+```{r}
+fset(factor(c("c", "d", "b", "a")))
+```
+
+### Family of related funcitons `order_doc`
+
+#### `fordered`
+
+fordered(x) is the function used to sets levels to the order in which they appear in the data, the input should be a factor, otherwise, the function will come to an error.
+
+```{r}
+fordered(iris$Species)
+fordered(gapminder::gapminder$continent)
+```
+
+#### `fdesc`
+
+fdesc(x) is used to reorder factor in descenging order, it will come to an error when the param is not a factor.
+
+```{r}
+fdesc(factor(c("a","b","c"))) # Levels: c b a
+
+# compare to the fordered function
+fordered(factor(c("a","b","c")))
+```
+
+### Family of related funcitons `df_read_write`
+
+#### `df_write`
+
+Use `df_write` to write the data frame into text file.
+
+```{r}
+lev <- levels(gapminder::gapminder$continent) 
+continent_df <- as.data.frame(lev)
+df_write(continent_df, "continent.txt")
+```
+
+
