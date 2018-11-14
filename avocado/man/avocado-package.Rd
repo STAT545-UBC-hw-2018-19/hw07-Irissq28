@@ -29,13 +29,5 @@ sales volume in multiple US markets.
 \examples{
 head(avocado)
 summary(avocado)
-
-}
-\seealso{
-Useful links:
-\itemize{
-  \item \url{https://www.kaggle.com/neuromusic/avocado-prices}
-}
-
 }
 \keyword{internal}

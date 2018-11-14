@@ -17,8 +17,6 @@
 #'      \item \code{4225} - Total number of avocados with PLU 4225 sold
 #'      \item \code{4770} - Total number of avocados with PLU 4770 sold
 #' }
-#' @examples
-#' head(avocado)
-#' summary(avocado)
-#'
-"_PACKAGE"
+#' @name avocado
+#' @docType package
+NULL

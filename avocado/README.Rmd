@@ -23,26 +23,69 @@ For more relevant data, please refer to [here](http://www.hassavocadoboard.com/r
 
 ## Installation
 
-You can install the released version of avocado from [CRAN](https://CRAN.R-project.org) with:
+You can install the avocado package from [my github](https://github.com/Irissq28/avocado) or run the code below in console.
 
-``` r
-install.packages("avocado")
+```{r}
+devtools::install_github("Irissq28/avocado")
 ```
 
 ## Example
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Load the package.
 
-```{r cars}
-summary(cars)
+```{r}
+library(avocado)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+Familiar with the data frame.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+summary(avocado)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+```{r}
+df_head <- head(avocado)
+knitr::kable(df_head, align = "c")
+```
+
+Load `ggplot`, `tidyverse` and `dplyr` to make a simple plot, which shows the total number of each type of avocados sold each year.
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+avocado %>%
+  group_by(type)  %>%
+  ggplot(aes(x = year,y = `Total Volume`, color = type)) +
+  theme_bw() +
+  geom_point() +
+  theme(plot.title = element_text(size = 13, hjust = 0.5)) +
+  labs(x="year",y="Total Volume",
+       title="Total number of each type of avocados sold each year")
+```
+
+The table shows the mean number of avocados sold of each region.
+
+```{r}
+sold_average <-avocado %>%
+  filter(year == 2018) %>%
+  group_by(region) %>%
+  summarise(`Total Volume Mean` = mean(`Total Volume`))
+
+knitr::kable(head(sold_average), align = "c")
+```
+
+The plot shows the region where the mean of total number of avocados sold larger than the mean of each region.
+
+```{r}
+sold_average %>%
+  filter(`Total Volume Mean` > mean(`Total Volume Mean`)) %>%
+  ggplot(aes(x= `Total Volume Mean`, y = region)) +
+  geom_point() +
+  theme_bw() +
+  theme(plot.title = element_text(size = 9, hjust = 0.5)) +
+  labs(x="Mean of Total Volume",y="region",
+       title="The region where the mean of total number of avocados sold larger than the mean of each region")
+```
+
+
