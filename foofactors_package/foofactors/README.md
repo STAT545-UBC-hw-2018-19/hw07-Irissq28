@@ -173,3 +173,16 @@ lev <- levels(gapminder::gapminder$continent)
 continent_df <- as.data.frame(lev)
 df_write(continent_df, "continent.txt")
 ```
+
+Use `df_read` to read from the "continent.txt" we wrote before.
+
+``` r
+re_df <- df_read("continent.txt")
+re_df
+#>        lev
+#> 1   Africa
+#> 2 Americas
+#> 3     Asia
+#> 4   Europe
+#> 5  Oceania
+```
