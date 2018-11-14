@@ -88,4 +88,5 @@ sold_average %>%
        title="The region where the mean of total number of avocados sold larger than the mean of each region")
 ```
 
-
+# Reference
+[Creating a package for your data set](https://www.r-bloggers.com/creating-a-package-for-your-data-set/)

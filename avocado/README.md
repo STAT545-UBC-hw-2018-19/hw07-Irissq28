@@ -13,8 +13,33 @@ You can install the avocado package from [my github](https://github.com/Irissq28
 
 ``` r
 devtools::install_github("Irissq28/avocado")
-#> Skipping install of 'avocado' from a github remote, the SHA1 (eb028f10) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo Irissq28/avocado@master
+#>   
+   checking for file ‘/private/var/folders/ff/60drh7nd4jzb_0hd_kgxlk680000gn/T/RtmpRPrsLx/remotes123e34a433ba/Irissq28-avocado-eb273dd/DESCRIPTION’ ...
+  
+✔  checking for file ‘/private/var/folders/ff/60drh7nd4jzb_0hd_kgxlk680000gn/T/RtmpRPrsLx/remotes123e34a433ba/Irissq28-avocado-eb273dd/DESCRIPTION’
+#> 
+  
+─  preparing ‘avocado’:
+#> 
+  
+   checking DESCRIPTION meta-information ...
+  
+✔  checking DESCRIPTION meta-information
+#> 
+  
+─  checking for LF line-endings in source and make files and shell scripts
+#> 
+  
+─  checking for empty or unneeded directories
+#> ─  looking to see if a ‘data/datalist’ file should be added
+#> 
+  
+─  building ‘avocado_0.1.0.tar.gz’
+#> 
+  
+   
+#> 
 ```
 
 Example
@@ -134,3 +159,8 @@ sold_average %>%
 ```
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+Reference
+=========
+
+[Creating a package for your data set](https://www.r-bloggers.com/creating-a-package-for-your-data-set/)
